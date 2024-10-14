@@ -9,7 +9,16 @@ module.exports = {
       data,
     });
   },
-  getAllTodoListById: (req, res) => {},
+
+  getAllTodoListById: async (req, res) => {
+    const { id } = req.params;
+    const data = await Todolist.findById(id);
+
+    res.json({
+      message: "data berhasil ditemukan",
+      data,
+    });
+  },
 
   addTodolist: (req, res) => {
     const data = req.body;
