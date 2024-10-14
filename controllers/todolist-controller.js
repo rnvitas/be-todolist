@@ -40,7 +40,15 @@ module.exports = {
     });
   },
 
-  deleteTodolistById: async (req, res) => {},
+  deleteTodolistById: async (req, res) => {
+    const { id } = req.params;
+
+    const deleteByID = await Todolist.deleteOne({ _id: id });
+    res.json({
+      message: "todo berhasil dihapus",
+      deleteByID,
+    });
+  },
 
   deleteAllTodolist: async (req, res) => {
     const data = await Todolist.deleteMany({});
