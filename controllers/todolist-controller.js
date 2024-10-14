@@ -29,7 +29,16 @@ module.exports = {
     });
   },
 
-  editTodolist: (req, res) => {},
+  editTodolist: async (req, res) => {
+    const { id } = req.params;
+    const { task } = req.body;
+
+    const updateTodo = await Todolist.findOneAndUpdate({ _id: id }, { task });
+    res.json({
+      message: "data berhasil diedit",
+      updateTodo,
+    });
+  },
 
   deleteTodolistById: async (req, res) => {},
 
