@@ -7,7 +7,7 @@ const {
   deleteTodolistById,
   deleteAllTodolist,
 } = require("../controllers/todolist-controller");
-const route = express.Router();
+const route = express.Router({ mergeParams: true });
 
 route.get("/", getAllTodoList);
 route.get("/:id", getAllTodoListById);
