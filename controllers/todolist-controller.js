@@ -23,9 +23,16 @@ module.exports = {
 
   addTodolist: (req, res) => {
     const { id_user } = req.params;
+    const { task, description } = req.body;
+    // Validasi untuk memastikan description dan task diinput
+    if (!description || !task) {
+      return res.status(400).json({
+        message: "Deskripsi dan task harus diinput",
+      });
+    }
     const newTodolist = new Todolist({
-      description: req.body.description,
-      task: req.body.task,
+      description: description,
+      task: task,
       user: id_user,
     });
 
@@ -36,16 +43,12 @@ module.exports = {
   },
 
   editTodolist: async (req, res) => {
-    const { id } = req.params;
-    const { id_user } = req.params;
-    const { task } = req.body;
-    const { description } = req.body.description;
-
+    const { id, id_user } = req.params;
+    const { task, description } = req.body;
+    console.log(req.body);
     const updateTodo = await Todolist.findOneAndUpdate(
-      { _id: id },
-      { task },
-      { user: id_user },
-      { description }
+      { _id: id, user: id_user },
+      { task, description }
     );
     res.json({
       message: "data berhasil diedit",
