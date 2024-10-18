@@ -1,4 +1,4 @@
-Dokumentasi API 
+# Dokumentasi API 
 # Pendahuluan
 API ini dirancang untuk mengelola daftar todolist pengguna. Setiap pengguna memiliki daftar tugas sendiri yang dapat mereka akses setelah melakukan autentikasi. Pengguna dapat melihat daftar, detail, edit, menghapus item todolist dan menghapus semua todolist yang sudah dibuat.
 
@@ -10,7 +10,7 @@ Header: Token akses harus disertakan dalam header Authorization setiap permintaa
 
 # EndPoint
 
-#Pengguna
+# Pengguna
 POST /auth/regist
 Deskripsi: Mendaftarkan pengguna baru.
 Request Body:
@@ -29,6 +29,9 @@ JSON
 {
   "token": "your_access_token"
 }
+
+GET /auth/users
+Deskripsi: Melihat list user
 
 # Todolist
 GET /:id_user/todos
