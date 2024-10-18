@@ -2,7 +2,8 @@ const Todolist = require("../models/Todolist");
 
 module.exports = {
   getAllTodoList: async (req, res) => {
-    const data = await Todolist.find({});
+    const { id_user } = req.params;
+    const data = await Todolist.find({ user: id_user });
 
     res.json({
       message: "berhasil mendapatkan data",
@@ -12,7 +13,7 @@ module.exports = {
 
   getAllTodoListById: async (req, res) => {
     const { id } = req.params;
-    const data = await Todolist.findById(id);
+    const data = await Todolist.findById({ _id: id });
 
     res.json({
       message: "data berhasil ditemukan",
@@ -21,8 +22,12 @@ module.exports = {
   },
 
   addTodolist: (req, res) => {
-    const data = req.body;
-    const newTodolist = new Todolist(data);
+    const { id_user } = req.params;
+    const newTodolist = new Todolist({
+      task: req.body.task,
+      user: id_user,
+    });
+
     newTodolist.save();
     res.json({
       message: "data berhasil ditambahkan",
@@ -31,9 +36,14 @@ module.exports = {
 
   editTodolist: async (req, res) => {
     const { id } = req.params;
+    const { id_user } = req.params;
     const { task } = req.body;
 
-    const updateTodo = await Todolist.findOneAndUpdate({ _id: id }, { task });
+    const updateTodo = await Todolist.findOneAndUpdate(
+      { _id: id },
+      { task },
+      { user: id_user }
+    );
     res.json({
       message: "data berhasil diedit",
       updateTodo,
@@ -42,8 +52,8 @@ module.exports = {
 
   deleteTodolistById: async (req, res) => {
     const { id } = req.params;
-
-    const deleteByID = await Todolist.deleteOne({ _id: id });
+    const { id_user } = req.params;
+    const deleteByID = await Todolist.deleteOne({ _id: id }, { user: id_user });
     res.json({
       message: "todo berhasil dihapus",
       deleteByID,
@@ -51,7 +61,8 @@ module.exports = {
   },
 
   deleteAllTodolist: async (req, res) => {
-    const data = await Todolist.deleteMany({});
+    const { id_user } = req.params;
+    const data = await Todolist.deleteMany({ user: id_user });
 
     res.json({
       message: "semua data berhasil dihapus",
