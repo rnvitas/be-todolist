@@ -24,6 +24,7 @@ module.exports = {
   addTodolist: (req, res) => {
     const { id_user } = req.params;
     const newTodolist = new Todolist({
+      description: req.body.description,
       task: req.body.task,
       user: id_user,
     });
@@ -38,11 +39,13 @@ module.exports = {
     const { id } = req.params;
     const { id_user } = req.params;
     const { task } = req.body;
+    const { description } = req.body.description;
 
     const updateTodo = await Todolist.findOneAndUpdate(
       { _id: id },
       { task },
-      { user: id_user }
+      { user: id_user },
+      { description }
     );
     res.json({
       message: "data berhasil diedit",
