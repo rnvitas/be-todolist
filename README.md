@@ -1,14 +1,14 @@
 Dokumentasi API 
-**#Pendahuluan**
+# Pendahuluan
 API ini dirancang untuk mengelola daftar todolist pengguna. Setiap pengguna memiliki daftar tugas sendiri yang dapat mereka akses setelah melakukan autentikasi. Pengguna dapat melihat daftar, detail, edit, menghapus item todolist dan menghapus semua todolist yang sudah dibuat.
 
-**#Autentikasi**
+# Autentikasi
 Metode: JWT (JSON Web Token)
 Registrasi: Pengguna harus mendaftar terlebih dahulu untuk mendapatkan token akses.
 Login: Setelah mendaftar, pengguna dapat login untuk mendapatkan token akses yang baru.
 Header: Token akses harus disertakan dalam header Authorization setiap permintaan dengan format Bearer <token>.
 
-**#EndPoint**
+# EndPoint
 
 #Pengguna
 POST /auth/regist
@@ -30,7 +30,7 @@ JSON
   "token": "your_access_token"
 }
 
-#Todolist
+# Todolist
 GET /:id_user/todos
 Deskripsi: Mendapatkan semua todo pengguna.
 POST /:id_user/todos
@@ -53,7 +53,7 @@ Deskripsi: Menghapus todo berdasarkan ID.
 DELETE /:id_user/todos/
 Deskripsi: Menghapus semua todo.
 
-**#Model Data**
+# Model Data
 User
 id (string)
 username (string)
@@ -68,7 +68,7 @@ user(ObjectId)
 Contoh Penggunaan (curl)
 Bash
 # Daftar pengguna
-curl -X POST -H "Content-Type: application/json" -d '{"username":"johnDoe", "password":"password123"}' http://your-api-url/users
+curl -X POST -H "Content-Type: application/json" -d '{"fullname":"John Doelll", "username":"johnDoe", "password":"password123"}' http://your-api-url/users
 
 # Login dan dapatkan token
 curl -X POST -H "Content-Type: application/json" -d '{"username":"johnDoe", "password":"password123"}' http://your-api-url/users/login
